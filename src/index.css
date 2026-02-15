@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/forms';
+
+@theme {
+  --font-sans:
+    Inter var, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@layer components {
+  .text-link-gradient {
+    @apply inline-block text-sm font-bold transition-all duration-300;
+    background: linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #64748b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Состояние при наведении для синего градиента */
+  .text-link-gradient:hover {
+    background: #2563eb;
+    -webkit-background-clip: text;
+    opacity: 0.8;
+  }
+
+  /* Красный градиент для Winner Card */
+  .text-winner-gradient {
+    @apply bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text font-black tracking-tighter text-transparent italic drop-shadow-sm;
+  }
+}
