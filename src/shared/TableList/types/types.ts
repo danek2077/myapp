@@ -1,6 +1,8 @@
+import { IndividualStats, Player } from "../../../services/types"
+
 export interface ColumnConfig<T> {
   header: string
-  key: keyof T | string
+  key: keyof T
   hint?: string
   align?: 'center' | 'left' | 'right'
   render?: (item: T) => React.ReactNode
@@ -17,4 +19,11 @@ export interface TablePaginationActionsProps {
     event: React.MouseEvent<HTMLButtonElement>,
     newPage: number,
   ) => void
+}
+
+
+export interface PlayerTableRow extends Omit<Player, 'history'> {
+  elo: number;
+  rank: string;
+  stats: IndividualStats; 
 }

@@ -22,7 +22,6 @@ import {
   TablePaginationActionsProps,
 } from '@mui/material'
 import { GenericTableProps } from './types/types'
-import { Link } from 'react-router'
 
 const headStyles = {
   container: {
@@ -154,13 +153,6 @@ export default function CustomPaginationActionsTable<T>(
     setPage(newPage)
   }
 
-  const getValue = (row: any, key: any) => {
-    if (key in row) {
-      return row[key]
-    }
-    return row.individualStats?.[key] ?? 'undefined'
-  }
-
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 400 }} aria-label="custom pagination table">
@@ -171,10 +163,12 @@ export default function CustomPaginationActionsTable<T>(
             position: 'relative',
           }}
         >
-          <div
-            className="absolute -top-30 right-0 h-32 w-40 rounded-full bg-red-600/20 bg-red-600/50 blur-3xl"
-            style={{ zIndex: 0, pointerEvents: 'none' }}
-          ></div>
+          <TableRow style={{ position: 'relative' }}>
+            <TableCell
+              className="absolute -top-33 right-0 h-32 w-40 rounded-full bg-red-600/20 bg-red-600/50 blur-3xl"
+              style={{ zIndex: 0, pointerEvents: 'none' }}
+            ></TableCell>
+          </TableRow>
 
           <TableRow style={{ position: 'relative', zIndex: 1 }}>
             <TableCell
@@ -239,7 +233,7 @@ export default function CustomPaginationActionsTable<T>(
                     align={col.align || 'center'}
                     sx={{ whiteSpace: 'nowrap' }}
                   >
-                    {col.render ? col.render(row) : getValue(row, col.key)}
+                    {col.render ? col.render(row) : (row[col.key] as React.ReactNode)}
                   </TableCell>
                 ))}
               </TableRow>

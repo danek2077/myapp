@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import { MainPage } from './pages/MainPage/MainPage'
 import { store } from './store'
 import ProfilePage from './pages/Profile/ProfilePage'
+import TestPage from './pages/TestPage/TestPage'
 
 const App: React.FC = () => {
   return (
@@ -12,7 +13,8 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/user/:id" element={<ProfilePage />} />
+          <Route path="/user/:slug" element={<ProfilePage />} />
+          <Route path="/test" element={<TestPage />} />
         </Routes>
       </BrowserRouter>
     </ReduxStoreProvider>

@@ -1,10 +1,11 @@
 import { Link } from 'react-router'
-import { Player } from '../../lib/data'
+import { Player } from '../../services/types'
+import { PlayerTableRow } from '../TableList/types/types'
 
-export const TableLink = ({ row }: { row: Partial<Player> }) => {
+export const TableLink = ({ row }: { row: PlayerTableRow }) => {
   return (
-    <Link to={`/user/${row.id}`} className="text-link-gradient">
-      {row.player}
+    <Link to={`/user/${row.slug}`} className="text-link-gradient">
+      {row.name}
     </Link>
   )
 }

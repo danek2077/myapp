@@ -1,22 +1,37 @@
-import { Player, data } from '../../lib/data'
 import Container from '../../shared/Container/Container'
 import Table from '../../shared/TableList/TableList'
-import { ColumnConfig } from '../../shared/TableList/types/types'
+import { ColumnConfig, PlayerTableRow } from '../../shared/TableList/types/types'
 import { TableLink } from '../../shared/TableLink/TableLink'
+import { useGetPlayersLatestStatsQuery } from '../../services/docs'
+import EloLeaderboard from '../../widgets/Tables/EloLeaderboard/EloLeaderboard'
+import ScoreLeaderboard from '../../widgets/Tables/ScoreLeaderboard/ScoreLeaderboard'
+
+const columns1: ColumnConfig<PlayerTableRow>[] = [
+  { key: 'name', header: 'NAME', render: (row) => <TableLink row={row} /> },
+  { key: 'elo', header: 'ELO',render:(row) => <>{row.elo}</>},
+]
+const columns2: ColumnConfig<PlayerTableRow>[] = [
+  { key: 'name', header: 'NAME', render: (row) => <TableLink row={row} /> },
+  {
+    key: 'stats',
+    header: 'INDIVIDUAL SCORE',
+    hint: 'average overall score per game',
+    render:(row)=><>{row.stats.overallScore}</>
+  },
+]
+const SEASON:number = 5
 
 export const MainPage: React.FC = () => {
-  const columns1: ColumnConfig<Partial<Player>>[] = [
-    { key: 'player', header: 'NAME', render: (row) => <TableLink row={row} /> },
-    { key: 'elo', header: 'ELO' },
-  ]
-  const columns2: ColumnConfig<Partial<Player>>[] = [
-    { key: 'player', header: 'NAME', render: (row) => <TableLink row={row} /> },
-    {
-      key: 'overallScore',
-      header: 'INDIVIDUAL SCORE',
-      hint: 'average overall score per game',
-    },
-  ]
+  const { data, isLoading, error } = useGetPlayersLatestStatsQuery(SEASON)
+
+  if (isLoading) {
+    return <div>loading...</div>
+  }
+  if (error) {
+    console.log(error)
+    return <div>error</div>
+  }
+  if (!data) return <div>Error data</div>
 
   return (
     <div className="mt-5">
@@ -39,10 +54,10 @@ export const MainPage: React.FC = () => {
         </div>
         <div className="mt-5 flex justify-evenly">
           <div>
-            <Table columns={columns1} data={data} />
+            <EloLeaderboard SEASON={SEASON}/>
           </div>
           <div>
-            <Table columns={columns2} data={data} />
+            <ScoreLeaderboard SEASON={SEASON}/>
           </div>
         </div>
       </Container>

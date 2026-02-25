@@ -3,34 +3,25 @@ import { useParams } from 'react-router'
 import { Box, Paper, Typography, Stack, Chip } from '@mui/material'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import Container from '../../shared/Container/Container'
-import { data } from '../../lib/data'
+
+import { useGetPlayerQuery } from '../../services/docs'
 
 const ProfilePage = () => {
-  const { id } = useParams<{ id: string }>()
-  
-  
-
-  // Имитация данных
-  const player = {
-    name: 'VIRTUAL',
-    position: 'ST (Striker)',
-    currentElo: 2450,
-    // Новая статистика
-    stats: {
-      passesCompletion: 87,
-      goals: 1.2,
-      assists: 0.8,
-      overallScore: 7.9,
-    },
-    history: [
-      { season: 'Season 4', elo: 2310, rank: 'Gold' },
-      { season: 'Season 3', elo: 2180, rank: 'Silver' },
-      { season: 'Season 2', elo: 1950, rank: 'Silver' },
-    ],
+  const { slug } = useParams<{ slug: string }>()
+  if (!slug) {
+    return undefined
   }
-
-  return (
-    <Container>
+  const { data, error, isLoading } = useGetPlayerQuery(slug)
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+  if (error) {
+    console.log(error)
+    return <div>Error</div>
+  }
+  if (data) {
+    const player = data
+    return (
       <Box
         sx={{
           minHeight: '100vh',
@@ -99,7 +90,7 @@ const ProfilePage = () => {
                       ml: 1,
                     }}
                   >
-                    ID: {id}
+                    name: {player.name}
                   </Typography>
                 </Stack>
               </Box>
@@ -132,14 +123,14 @@ const ProfilePage = () => {
                     lineHeight: 1,
                   }}
                 >
-                  {player.currentElo}
+                  1221
                 </Typography>
               </Box>
             </Stack>
           </Paper>
 
           {/* СЕТКА СТАТИСТИКИ */}
-          <Box
+          {/* <Box
             sx={{
               display: 'grid',
               gridTemplateColumns: { xs: '1fr 1fr', md: '1fr 1fr 1fr 1fr' },
@@ -206,7 +197,7 @@ const ProfilePage = () => {
                 </Typography>
               </Paper>
             ))}
-          </Box>
+          </Box> */}
 
           {/* ИСТОРИЯ: Карточная система с границами */}
           <Typography
@@ -289,8 +280,8 @@ const ProfilePage = () => {
           </Stack>
         </Box>
       </Box>
-    </Container>
-  )
+    )
+  }
 }
 
 export default ProfilePage
