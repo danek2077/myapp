@@ -16,7 +16,16 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "baseUrl": "../myapp/src",
+    "paths": {
+      "@src/*": ["./*"],
+      "@app/*": ["./app/*"],
+      "@pages/*": ["./pages/*"],
+      "@widgets/*": ["./widgets/*"],
+      "@entities/*": ["./entities/*"],
+      "@shared/*": ["./shared/*"]
+    }
   },
   "include": [
     "vite.config.ts",

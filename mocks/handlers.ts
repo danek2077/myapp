@@ -1,7 +1,7 @@
 import { delay, http, HttpResponse } from 'msw'
 import { Players } from '../src/services/types'
 
-const data:Players = [
+const data: Players = [
   {
     id: 'phantom-st',
     slug: 'phantom',
