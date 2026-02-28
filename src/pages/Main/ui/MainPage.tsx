@@ -1,6 +1,5 @@
+import { EloLeaderboard,ScoreLeaderboard } from '@src/widgets/Table/index'
 import Container from '../../../shared/ui/Container/Container'
-import EloLeaderboard from '../../../widgets/Table/EloLeaderboard/ui/EloLeaderboard'
-import ScoreLeaderboard from '../../../widgets/Table/ScoreLeaderboard/ui/ScoreLeaderboard'
 
 const SEASON: number = 5
 

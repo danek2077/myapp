@@ -3,7 +3,7 @@ import React from 'react'
 import { useGetPlayersByScoreQuery } from '../../../../entities/player'
 import type { PlayerTableRow } from '../../../../entities/player/model/types'
 import { TableLink } from '../../../../entities/player/ui/TableLink'
-import Table from '../../../../shared/TableList/ui/TableList'
+import { TableList } from '../../../../shared/TableList/ui/TableList'
 import type { ColumnConfig } from '../../../../shared/TableList/model/types'
 
 const columns: ColumnConfig<PlayerTableRow>[] = [
@@ -25,6 +25,6 @@ export const ScoreLeaderboard = ({ SEASON }: { SEASON: number }) => {
     return <div>error</div>
   }
   if (!data) return <div>Error data</div>
-  return <Table columns={columns} data={data} />
+  return <TableList columns={columns} data={data} />
 }
 
