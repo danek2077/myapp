@@ -1,5 +1,5 @@
 import React from 'react'
 
-export const TestPage = () => {
+export const AllTimeScore = () => {
   return <div></div>
 }

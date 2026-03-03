@@ -1,1 +1,1 @@
-export {EloLeaderboard} from './ui/EloLeaderboard'
+export { EloLeaderboard } from './ui/EloLeaderboard'

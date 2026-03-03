@@ -1,7 +1,7 @@
-import { EloLeaderboard,ScoreLeaderboard } from '@src/widgets/Table/index'
+import { EloLeaderboard, ScoreLeaderboard } from '@src/widgets/Table/index'
 import Container from '../../../shared/ui/Container/Container'
-
-const SEASON: number = 5
+import { CURRENT_SEASON } from '@src/shared/config/constants'
+import { LeaderboardList } from '@src/widgets/Leaderboard/ui/LeaderboardList'
 
 export const MainPage: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ export const MainPage: React.FC = () => {
         <div className="flex justify-center">
           <div className="group relative w-80 overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl">
             {/* Декоративный эффект свечения на фоне */}
-            <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full  bg-red-600/45 blur-3xl"></div>
+            <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-red-600/45 blur-3xl"></div>
 
             <div className="relative z-10">
               <div className="mb-1 text-xs font-bold tracking-[0.2em] text-slate-400 uppercase">
@@ -23,13 +23,8 @@ export const MainPage: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="mt-5 flex justify-evenly">
-          <div>
-            <EloLeaderboard SEASON={SEASON} />
-          </div>
-          <div>
-            <ScoreLeaderboard SEASON={SEASON} />
-          </div>
+        <div>
+          <LeaderboardList />
         </div>
       </Container>
     </div>

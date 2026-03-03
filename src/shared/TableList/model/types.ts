@@ -1,8 +1,6 @@
-
-
 export interface ColumnConfig<T> {
   header: string
-  key: keyof T
+  key: string & {}
   hint?: string
   align?: 'center' | 'left' | 'right'
   render?: (item: T) => React.ReactNode

@@ -1,8 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-
-import { axiosBaseQuery } from '../../../shared/api/index' // Вынеси свой axiosBaseQuery в shared
-import { mapPlayerStats } from '../lib/mapPlayerStats'
-import type { Player, Players, PlayerTableRow } from '../model/types'
+import { axiosBaseQuery } from '../../../shared/api/index'
+import type { Player, PlayerDto } from '../model/types'
+import { mapPlayer } from '../lib/mapPlayerStats'
 
 export const playerApi = createApi({
   reducerPath: 'playerApi',
@@ -10,18 +9,12 @@ export const playerApi = createApi({
   endpoints: (builder) => ({
     getPlayerBySlug: builder.query<Player, string>({
       query: (slug) => ({ url: `/docs_list/${slug}` }),
+      transformResponse: (dto: PlayerDto): Player => mapPlayer(dto),
     }),
-    getPlayersLatestStats: builder.query<PlayerTableRow[], number>({
+    getPlayers: builder.query<Player[], void>({
       query: () => ({ url: '/docs_list' }),
-      transformResponse: (response: Players, _, season) =>
-        mapPlayerStats(response, season),
-    }),
-    getPlayersByScore: builder.query<PlayerTableRow[], number>({
-      query: () => ({ url: '/docs_list' }),
-      transformResponse: (response: Players, _, season) =>
-        mapPlayerStats(response, season).sort(
-          (a, b) => b.stats.overallScore - a.stats.overallScore,
-        ),
+      transformResponse: (response: PlayerDto[]): Player[] =>
+        response.map((dto) => mapPlayer(dto)),
     }),
   }),
 })

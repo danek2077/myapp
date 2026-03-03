@@ -6,9 +6,6 @@ import { ProfilePage, TestPage } from '@src/pages'
 import { MainPage } from '@src/pages/Main/ui/MainPage'
 import { store } from './store'
 
-
-
-
 const App: React.FC = () => {
   return (
     <ReduxStoreProvider store={store}>

@@ -3,13 +3,8 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import LastPageIcon from '@mui/icons-material/LastPage'
-import type {
-  TablePaginationActionsProps} from '@mui/material';
-import {
-  Stack,
-  Tooltip,
-  TableHead
-} from '@mui/material'
+import type { TablePaginationActionsProps } from '@mui/material'
+import { Stack, Tooltip, TableHead } from '@mui/material'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Paper from '@mui/material/Paper'
@@ -28,7 +23,6 @@ import type { GenericTableProps } from '../model/types'
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme()
   const { count, page, rowsPerPage, onPageChange } = props
-
   const handleFirstPageButtonClick = (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
@@ -97,6 +91,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 
 export function TableList<T>(props: GenericTableProps<T>) {
   const { columns, data } = props
+  console.log(data)
 
   const [page, setPage] = React.useState(0)
   const rowsPerPage = 5
@@ -128,7 +123,7 @@ export function TableList<T>(props: GenericTableProps<T>) {
         >
           <TableRow style={{ position: 'relative' }}>
             <TableCell
-              className="absolute -top-33 right-0 h-32 w-40 rounded-full  bg-red-600/50 blur-3xl"
+              className="absolute -top-33 right-0 h-32 w-40 rounded-full bg-red-600/50 blur-3xl"
               style={{ zIndex: 0, pointerEvents: 'none' }}
             ></TableCell>
           </TableRow>
@@ -186,6 +181,7 @@ export function TableList<T>(props: GenericTableProps<T>) {
         </TableHead>
         <TableBody>
           {paginatedData.map((row, index) => {
+            console.log(row)
             const globalIndex = index + page * rowsPerPage + 1
             return (
               <TableRow key={globalIndex}>
@@ -196,9 +192,7 @@ export function TableList<T>(props: GenericTableProps<T>) {
                     align={col.align || 'center'}
                     sx={{ whiteSpace: 'nowrap' }}
                   >
-                    {col.render
-                      ? col.render(row)
-                      : (row[col.key] as React.ReactNode)}
+                    {col.render ? col.render(row) : undefined}
                   </TableCell>
                 ))}
               </TableRow>

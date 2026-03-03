@@ -27,4 +27,3 @@ export const ScoreLeaderboard = ({ SEASON }: { SEASON: number }) => {
   if (!data) return <div>Error data</div>
   return <TableList columns={columns} data={data} />
 }
-

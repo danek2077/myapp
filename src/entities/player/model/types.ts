@@ -19,23 +19,21 @@ export interface SeasonHistory {
   season: number
   elo: number
   rank: string // "Legend", "Master", "Gold" и т.д.
-  stats: Partial<IndividualStats> // Статистика именно за этот сезон
+  stats: IndividualStats // Статистика именно за этот сезон
 }
 
-export interface Player {
+export interface PlayerDto {
   id: string
   slug: string
   name: string
   position: 'GK' | 'DM' | 'AM' | 'ST'
-  gamesPlayed?: number
-  winnedGames?: number
-  loosedGames?: number
-  history: SeasonHistory[] // Массив сезонов
+  history: SeasonHistory[]
 }
-
-export type Players = Player[]
-export interface PlayerTableRow extends Omit<Player, 'history'> {
-  elo: number
-  rank: string
-  stats: IndividualStats
+export interface Player extends PlayerDto {
+  allTime: { elo: number; score: number }
+  latestStats?: {
+    elo: number
+    rank: string
+    stats: IndividualStats
+  }
 }

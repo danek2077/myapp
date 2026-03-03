@@ -1,1 +1,1 @@
-export {ScoreLeaderboard} from './ui/ScoreLeaderboard'
+export { ScoreLeaderboard } from './ui/ScoreLeaderboard'

@@ -1,2 +1,2 @@
-export {EloLeaderboard} from './EloLeaderboard/index'
-export {ScoreLeaderboard} from './ScoreLeaderboard/index'
+export { EloLeaderboard } from './EloLeaderboard/index'
+export { ScoreLeaderboard } from './ScoreLeaderboard/index'
