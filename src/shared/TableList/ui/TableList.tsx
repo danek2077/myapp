@@ -91,7 +91,6 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 
 export function TableList<T>(props: GenericTableProps<T>) {
   const { columns, data } = props
-  console.log(data)
 
   const [page, setPage] = React.useState(0)
   const rowsPerPage = 5
@@ -181,7 +180,6 @@ export function TableList<T>(props: GenericTableProps<T>) {
         </TableHead>
         <TableBody>
           {paginatedData.map((row, index) => {
-            console.log(row)
             const globalIndex = index + page * rowsPerPage + 1
             return (
               <TableRow key={globalIndex}>

@@ -1,6 +1,4 @@
-import { EloLeaderboard, ScoreLeaderboard } from '@src/widgets/Table/index'
 import Container from '../../../shared/ui/Container/Container'
-import { CURRENT_SEASON } from '@src/shared/config/constants'
 import { LeaderboardList } from '@src/widgets/Leaderboard/ui/LeaderboardList'
 
 export const MainPage: React.FC = () => {

@@ -1,3 +1,4 @@
 export { MainPage } from './Main'
-export { ProfilePage } from './Profile'
+export { PlayerProfilePage } from './PlayerProfile'
 export { TestPage } from './Test'
+export { PlayerSeasonPage } from './PlayerSeason'

@@ -8,6 +8,7 @@ type LeaderboardTableProps<T> = {
   isLoading: boolean
   hasError: boolean
 }
+
 export const LeaderboardTable = (props: LeaderboardTableProps<Player>) => {
   const { columns, data, hasError, isLoading } = props
 
